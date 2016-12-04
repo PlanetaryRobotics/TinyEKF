@@ -22,3 +22,18 @@ Matplotlib.
 
 To learn about the Extended Kalman Filter and why it is so useful, try 
 this [interactive tutorial](http://home.wlu.edu/~levys/kalman_tutorial/).
+
+## Fork 
+
+### Changes
+
+* Make State transition and State-Msmt transition functions explicit
+* Some changes to integrate into ROS c++ systems for testing with other EKF implementations
+* Some cleanup, variable name changes
+
+### Build
+
+* cd native
+* make clean
+* make compile
+* lib is created in build folder
