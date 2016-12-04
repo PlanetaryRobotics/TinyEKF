@@ -32,6 +32,9 @@
 
         double x[N];     // state vector
 
+        double A[N][N];  // State-transition function
+        double C[M][N];  // State-measurement function
+
         double P[N][N];  // prediction error covariance
         double Q[N][N];  // process noise covariance 
         double R[M][M];  // measurement error covariance
@@ -56,13 +59,28 @@
         double tmp5[M]; 
     * </pre>
   */
+
+/**
+  * Initializes the ekf structure.
+  * @param ekf pointer to structure EKF 
+  * @param n  number of states 
+  * @param m number of measurements
+  */
 void ekf_init(void * ekf, int n, int m);
 
 /**
-  * Runs one step of EKF prediction and update. Your code should first build a model, setting
-  * the contents of <tt>ekf.fx</tt>, <tt>ekf.F</tt>, <tt>ekf.hx</tt>, and <tt>ekf.H</tt> to appropriate values.
+  * Runs one step of EKF prediction. Your code should first build a model, setting
+  * the contents of <tt>ekf.A</tt>, <tt>ekf.F</tt>, <tt>ekf.hx</tt>, and <tt>ekf.H</tt> to appropriate values.
+  * @param ekf pointer to structure EKF 
+  * @param delta time duration for predict step
+  */
+void ekf_predict(void * ekf, double delta);
+
+/**
+  * Runs one step of EKF update. Your code should first build a model, setting
+  * the contents of <tt>ekf.fx</tt>, <tt>ekf.F</tt>, <tt>ekf.hx</tt>, and <tt>ekf.H</tt> to appropriate values and then call the predict step.
   * @param ekf pointer to structure EKF 
   * @param z array of measurement (observation) values
   * @return 0 on success, 1 on failure caused by non-positive-definite matrix.
   */
-int ekf_step(void * ekf, double * z);
+int ekf_step(void * ekf, double * z, int idx);
